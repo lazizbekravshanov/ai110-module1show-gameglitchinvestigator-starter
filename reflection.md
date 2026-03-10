@@ -45,3 +45,15 @@ Streamlit works differently from most frameworks: every time a user interacts wi
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
 One habit I want to carry forward is running tests before declaring a fix done — I thought I'd fixed the hint logic the first time, but pytest immediately proved me wrong. Without it, I would have shipped the same bug in different clothes. One thing I'd do differently next time is prompt AI with the actual broken code and a specific expected behavior upfront, rather than asking a general question and then trying to adapt the answer; that's where the misleading suggestion came from. This project genuinely shifted how I think about AI-generated code — it's a strong starting point but it can confidently reproduce the exact bug you're trying to fix, so treating every AI output as something that still needs to be read and tested is now non-negotiable for me.
+
+---
+
+## 6. Challenge 5: AI Model Comparison
+
+For this challenge, I selected the "hints pointing the wrong way" bug from Phase 1, where the game showed "Go HIGHER!" for too-high guesses and vice versa. I asked for fixes from Copilot (in VS Code) and ChatGPT.
+
+**Copilot's Response:** It provided a direct code fix, suggesting to swap the messages: `return "Too High", "📉 Go LOWER!"` for `guess > secret`. It explained that the original logic was inverted, and the fix ensures messages match the outcome. The code was readable and included comments for clarity.
+
+**ChatGPT's Response:** It also suggested swapping the messages but added more context: "The issue is that 'Too High' should prompt going lower, not higher. Here's the corrected code with an explanation of why the comparison works." It emphasized the logic behind `if guess > secret` and included a note on potential edge cases like equal values.
+
+**Comparison:** ChatGPT gave a more readable fix with better explanation of the "why" (detailing the comparison logic and edge cases), making it easier for beginners. Copilot's fix was concise and directly actionable but less explanatory. Overall, ChatGPT explained the "why" more clearly, while Copilot was quicker for implementation.
