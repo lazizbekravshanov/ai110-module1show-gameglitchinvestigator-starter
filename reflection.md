@@ -34,6 +34,7 @@ I decided a bug was fixed by running both automated tests (pytest) and manual te
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+Streamlit works differently from most frameworks: every time a user interacts with the app — clicking a button, typing in a field — the entire Python script reruns from top to bottom. That means any variable you define normally (secret = random.randint(1, 100)) gets reset to a fresh value on every interaction. Session state is Streamlit's fix for this: st.session_state is a dictionary that persists across reruns within a session, so values you store there survive button clicks. If I were explaining it to a friend, I'd say: imagine your code is a whiteboard that gets erased and redrawn every time someone clicks anything — session state is a sticky note on the side of the whiteboard that doesn't get erased.
 
 ---
 
@@ -43,3 +44,4 @@ I decided a bug was fixed by running both automated tests (pytest) and manual te
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+One habit I want to carry forward is running tests before declaring a fix done — I thought I'd fixed the hint logic the first time, but pytest immediately proved me wrong. Without it, I would have shipped the same bug in different clothes. One thing I'd do differently next time is prompt AI with the actual broken code and a specific expected behavior upfront, rather than asking a general question and then trying to adapt the answer; that's where the misleading suggestion came from. This project genuinely shifted how I think about AI-generated code — it's a strong starting point but it can confidently reproduce the exact bug you're trying to fix, so treating every AI output as something that still needs to be read and tested is now non-negotiable for me.
