@@ -63,6 +63,15 @@ st.info(
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
+# Enhanced UI: Display game history as a table
+if st.session_state.history:
+    st.subheader("📊 Guess History")
+    history_data = []
+    for i, guess in enumerate(st.session_state.history, 1):
+        closeness = "🔥 Hot" if abs(guess - st.session_state.secret) <= 10 else "❄️ Cold"
+        history_data.append({"Attempt": i, "Guess": guess, "Closeness": closeness})
+    st.table(history_data)
+
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
     st.write("Attempts:", st.session_state.attempts)
@@ -119,7 +128,11 @@ if submit:
         outcome, message = check_guess(guess_int, st.session_state.secret)
 
         if show_hint:
-            st.warning(message)
+            if outcome == "Win":
+                st.success(f"🎉 {message}")
+            else:
+                closeness_emoji = "🔥" if abs(guess_int - st.session_state.secret) <= 10 else "❄️"
+                st.info(f"{closeness_emoji} {message}")
 
         st.session_state.score = update_score(
             current_score=st.session_state.score,

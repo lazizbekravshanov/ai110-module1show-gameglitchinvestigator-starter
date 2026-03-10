@@ -54,4 +54,7 @@ Fixes applied: (1) Added a sentinel (`game_initialized`) to initialize session s
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+- [x] [Challenge 4: Enhanced Game UI] Added color-coded hints (green for win, blue for hints), hot/cold emojis (🔥 for guesses within 10, ❄️ for farther), and a guess history table showing attempts, guesses, and closeness indicators.
+
+![Enhanced UI Screenshot](image-2.png)  
+*Screenshot of the enhanced game UI with history table, color-coded hints, and emojis.*
