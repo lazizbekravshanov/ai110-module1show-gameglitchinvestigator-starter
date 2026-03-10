@@ -8,6 +8,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
+  When I first ran the app, the game immediately looked off — I could open the "Developer Debug Info" tab to see the secret number, but every time I clicked Submit, the number changed, making it literally impossible to win. Two concrete bugs stood out right away: first, the secret number regenerated on every button click instead of staying fixed for the round; second, the "Higher" and "Lower" hints were completely backwards — if my guess was too low, the game told me to guess lower, and vice versa. The app ran without crashing, which made the bugs sneaky because nothing looked visually broken.
+
 ---
 
 ## 2. How did you use AI as a teammate?
@@ -15,6 +17,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+
+I used Copilot (in VS Code) and ChatGPT for this project. For a correct suggestion, when fixing the state reset bug, I asked ChatGPT: "How do I keep a variable from resetting in Streamlit when I click a button?" It correctly explained Streamlit's rerun behavior and suggested using `if "secret" not in st.session_state` to initialize once. I verified by running the app, opening the debug tab, and confirming the secret stayed fixed across submits. For an incorrect/misleading suggestion, when asking Copilot to refactor the hint logic, it initially generated code that kept the original backwards directions (e.g., "Go HIGHER!" for too high guesses). I verified this was wrong by manually testing the logic and running pytest, which failed until I corrected the messages to match the outcomes.
 
 ---
 
@@ -25,7 +29,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
----
+I decided a bug was fixed by running both automated tests (pytest) and manual testing in the live Streamlit app. For example, after fixing the hint directions, I ran pytest on the new test_check_guess_string_secret, which passed and confirmed the logic handled both numeric and string comparisons correctly. I also played the game manually, guessing numbers and checking that hints like "Go LOWER!" appeared for too-high guesses, and that the secret didn't change on submits. Copilot helped design tests by generating the initial test cases for parse_guess and update_score, which I then expanded; it also suggested the string secret test to cover the glitchy fallback behavior.
 
 ## 4. What did you learn about Streamlit and state?
 
